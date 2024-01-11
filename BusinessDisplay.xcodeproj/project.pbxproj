@@ -14,6 +14,7 @@
 		AEAF30872B50AA4400C7778B /* BusinessDisplayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30862B50AA4400C7778B /* BusinessDisplayTests.swift */; };
 		AEAF30912B50AA4500C7778B /* BusinessDisplayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30902B50AA4500C7778B /* BusinessDisplayUITests.swift */; };
 		AEAF30932B50AA4500C7778B /* BusinessDisplayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30922B50AA4500C7778B /* BusinessDisplayUITestsLaunchTests.swift */; };
+		AEAF30A12B50AD3B00C7778B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		AEAF308C2B50AA4500C7778B /* BusinessDisplayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusinessDisplayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAF30902B50AA4500C7778B /* BusinessDisplayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDisplayUITests.swift; sourceTree = "<group>"; };
 		AEAF30922B50AA4500C7778B /* BusinessDisplayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDisplayUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		AEAF30742B50AA4100C7778B /* BusinessDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				AEAF309F2B50AD0E00C7778B /* Services */,
 				AEAF30752B50AA4100C7778B /* BusinessDisplayApp.swift */,
 				AEAF30772B50AA4100C7778B /* ContentView.swift */,
 				AEAF30792B50AA4400C7778B /* Assets.xcassets */,
@@ -125,6 +128,14 @@
 				AEAF30922B50AA4500C7778B /* BusinessDisplayUITestsLaunchTests.swift */,
 			);
 			path = BusinessDisplayUITests;
+			sourceTree = "<group>";
+		};
+		AEAF309F2B50AD0E00C7778B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEAF30A12B50AD3B00C7778B /* NetworkManager.swift in Sources */,
 				AEAF30782B50AA4100C7778B /* ContentView.swift in Sources */,
 				AEAF30762B50AA4100C7778B /* BusinessDisplayApp.swift in Sources */,
 			);
