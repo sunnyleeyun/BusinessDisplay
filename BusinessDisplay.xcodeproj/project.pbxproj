@@ -15,6 +15,14 @@
 		AEAF30912B50AA4500C7778B /* BusinessDisplayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30902B50AA4500C7778B /* BusinessDisplayUITests.swift */; };
 		AEAF30932B50AA4500C7778B /* BusinessDisplayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30922B50AA4500C7778B /* BusinessDisplayUITestsLaunchTests.swift */; };
 		AEAF30A12B50AD3B00C7778B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */; };
+		AEAF30A32B50B1DC00C7778B /* BusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30A22B50B1DC00C7778B /* BusinessService.swift */; };
+		AEAF30A42B50B1DC00C7778B /* BusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30A22B50B1DC00C7778B /* BusinessService.swift */; };
+		AEAF30A62B50B24500C7778B /* MockBusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30A52B50B24500C7778B /* MockBusinessService.swift */; };
+		AEAF30AB2B50B31D00C7778B /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30AA2B50B31D00C7778B /* Business.swift */; };
+		AEAF30AC2B50B31D00C7778B /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30AA2B50B31D00C7778B /* Business.swift */; };
+		AEAF30AF2B50B4AE00C7778B /* BusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */; };
+		AEAF30B02B50B4AE00C7778B /* BusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */; };
+		AEAF30B22B50B4D100C7778B /* BusinessViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30B12B50B4D100C7778B /* BusinessViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +54,11 @@
 		AEAF30902B50AA4500C7778B /* BusinessDisplayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDisplayUITests.swift; sourceTree = "<group>"; };
 		AEAF30922B50AA4500C7778B /* BusinessDisplayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDisplayUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		AEAF30A22B50B1DC00C7778B /* BusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessService.swift; sourceTree = "<group>"; };
+		AEAF30A52B50B24500C7778B /* MockBusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBusinessService.swift; sourceTree = "<group>"; };
+		AEAF30AA2B50B31D00C7778B /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
+		AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewModel.swift; sourceTree = "<group>"; };
+		AEAF30B12B50B4D100C7778B /* BusinessViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +109,7 @@
 		AEAF30742B50AA4100C7778B /* BusinessDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				AEAF30A72B50B2DE00C7778B /* Features */,
 				AEAF309F2B50AD0E00C7778B /* Services */,
 				AEAF30752B50AA4100C7778B /* BusinessDisplayApp.swift */,
 				AEAF30772B50AA4100C7778B /* ContentView.swift */,
@@ -117,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				AEAF30862B50AA4400C7778B /* BusinessDisplayTests.swift */,
+				AEAF30A52B50B24500C7778B /* MockBusinessService.swift */,
+				AEAF30B12B50B4D100C7778B /* BusinessViewModelTests.swift */,
 			);
 			path = BusinessDisplayTests;
 			sourceTree = "<group>";
@@ -134,8 +150,42 @@
 			isa = PBXGroup;
 			children = (
 				AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */,
+				AEAF30A22B50B1DC00C7778B /* BusinessService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		AEAF30A72B50B2DE00C7778B /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AEAF30A82B50B2EF00C7778B /* Business */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		AEAF30A82B50B2EF00C7778B /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				AEAF30AD2B50B48300C7778B /* View Model */,
+				AEAF30A92B50B31200C7778B /* Model */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		AEAF30A92B50B31200C7778B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AEAF30AA2B50B31D00C7778B /* Business.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AEAF30AD2B50B48300C7778B /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +320,9 @@
 			files = (
 				AEAF30A12B50AD3B00C7778B /* NetworkManager.swift in Sources */,
 				AEAF30782B50AA4100C7778B /* ContentView.swift in Sources */,
+				AEAF30A32B50B1DC00C7778B /* BusinessService.swift in Sources */,
+				AEAF30AB2B50B31D00C7778B /* Business.swift in Sources */,
+				AEAF30AF2B50B4AE00C7778B /* BusinessViewModel.swift in Sources */,
 				AEAF30762B50AA4100C7778B /* BusinessDisplayApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,7 +331,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEAF30A62B50B24500C7778B /* MockBusinessService.swift in Sources */,
+				AEAF30AC2B50B31D00C7778B /* Business.swift in Sources */,
+				AEAF30A42B50B1DC00C7778B /* BusinessService.swift in Sources */,
 				AEAF30872B50AA4400C7778B /* BusinessDisplayTests.swift in Sources */,
+				AEAF30B22B50B4D100C7778B /* BusinessViewModelTests.swift in Sources */,
+				AEAF30B02B50B4AE00C7778B /* BusinessViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
