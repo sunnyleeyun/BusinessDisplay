@@ -40,4 +40,10 @@ final class BusinessViewModelTests: XCTestCase {
         XCTAssertEqual(businessVM.business!.locationName, "BEASTRO by Marshawn Lynch")
         XCTAssertEqual(businessVM.business!.hours.count, 7)
     }
+    
+    func testOpeningHours() {
+        let mock = MockBusinessService()
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        XCTAssertEqual(businessVM.business?.openingHours().count, 7)
+    }
 }
