@@ -66,6 +66,89 @@ struct Business: Codable {
         case opensAgainAt(String)
         case opens(String, String)
     }
+        
+    
+    // Method to generate open text based on the current timestamp
+    func openStatus(currentTimestamp: Int, periodCase: Case = .UPPER) -> String {
+        let openingHours = openingHours()
+        if openingHours.count != 7 {
+            fatalError("Opening Hours Mapping Issue")
+        }
+        
+        let now = currentTimestamp
+        let nowDayIdx = adjustedCurrentDay(from: now)
+        let nowMinutes = getCurrentTimestampInMinutes(from: now)
+        
+        let status = getStatus(openingHours: openingHours, nowDayIdx: nowDayIdx, nowMinutes: nowMinutes, periodCase: periodCase)
+        
+        switch status {
+        case .openUntil(let convertedTime):
+            return "Open until \(convertedTime)"
+        case .openUntilReopens(let convertedTime, let nextConvertedTime):
+            return "Open until \(convertedTime), reopens at \(nextConvertedTime)"
+        case .opensAgainAt(let nextConvertedTime):
+            return "Opens again at \(nextConvertedTime)"
+        case .opens(let nextDay, let nextConvertedTime):
+            return "Opens \(nextDay) \(nextConvertedTime)"
+        }
+    }
+    
+    func formattedOpeningHours(from currentTimestamp: Int) -> [PresentedOpeningHours] {
+        let openingHours = openingHours()
+        var formattedHours: [PresentedOpeningHours] = []
+
+        for (day, timeSlots) in openingHours {
+            if timeSlots.isEmpty {
+                formattedHours.append(PresentedOpeningHours(day: day.fullName, hours: "Closed", isBold: false))
+                continue
+            }
+
+            for timeSlot in timeSlots {
+                let previousEntry = formattedHours.last
+
+                let dayString: String
+                if let previousDay = previousEntry?.day, previousDay == day.fullName {
+                    dayString = ""
+                } else {
+                    dayString = day.fullName
+                }
+                let isBold = isCurrentTimestampWithinTimeSlot(currentTimestamp: currentTimestamp, day: day, timeSlot: timeSlot)
+                if (isOpen24Hours(timeSlot)) {
+                    formattedHours.append(PresentedOpeningHours(day: dayString, hours: "Open 24hrs", isBold: isBold))
+                } else {
+                    let formattedTime = formatTimeSlot(timeSlot, .LOWER)
+                    formattedHours.append(PresentedOpeningHours(day: dayString, hours: formattedTime, isBold: isBold))
+                }
+            }
+        }
+
+        return formattedHours
+    }
+    
+    
+}
+
+extension Business {
+    private func isOpen24Hours(_ timeSlot: TimeSlot) -> Bool {
+        return timeSlot.start == 0 && timeSlot.end == 1440
+    }
+    private func isCurrentTimestampWithinTimeSlot(currentTimestamp: Int, day: DayOfWeek, timeSlot: TimeSlot) -> Bool {
+        let now = currentTimestamp
+        let nowDayOfWeek = getDayOfWeek(from: currentTimestamp)
+        let nowMinutes = getCurrentTimestampInMinutes(from: now)
+        // if not the same day, return false (not bold)
+        if (nowDayOfWeek != day) {
+            return false
+        }
+        // if the same day, check within time range
+        return nowMinutes >= timeSlot.start && nowMinutes < timeSlot.end
+    }
+    
+    private func getDayOfWeek(from currentTimestamp: Int) -> DayOfWeek {
+        let nowDayIdx = adjustedCurrentDay(from: currentTimestamp)
+        let consecutiveDays: [DayOfWeek] = [.MON, .TUE, .WED, .THU, .FRI, .SAT, .SUN]
+        return consecutiveDays[nowDayIdx]
+    }
     
     private func getStatus(openingHours: [(DayOfWeek, [TimeSlot])], nowDayIdx: Int, nowMinutes: Int, periodCase: Case = .UPPER) -> BusinessStatus {
         
@@ -102,34 +185,8 @@ struct Business: Codable {
             return .opensAgainAt(nextDayConvertedStartTime)
         } else {
             return .opens(nextDay.fullName, nextDayConvertedStartTime)
-        }    }
-        
-    
-    // Method to generate open text based on the current timestamp
-    func openStatus(currentTimestamp: Int, periodCase: Case = .UPPER) -> String {
-        let openingHours = openingHours()
-        if openingHours.count != 7 {
-            fatalError("Opening Hours Mapping Issue")
-        }
-        
-        let now = currentTimestamp
-        let nowDayIdx = adjustedCurrentDay(from: now)
-        let nowMinutes = getCurrentTimestampInMinutes(from: now)
-        
-        let status = getStatus(openingHours: openingHours, nowDayIdx: nowDayIdx, nowMinutes: nowMinutes, periodCase: periodCase)
-        
-        switch status {
-        case .openUntil(let convertedTime):
-            return "Open until \(convertedTime)"
-        case .openUntilReopens(let convertedTime, let nextConvertedTime):
-            return "Open until \(convertedTime), reopens at \(nextConvertedTime)"
-        case .opensAgainAt(let nextConvertedTime):
-            return "Opens again at \(nextConvertedTime)"
-        case .opens(let nextDay, let nextConvertedTime):
-            return "Opens \(nextDay) \(nextConvertedTime)"
         }
     }
-    
     
     /// Calculates the adjusted current day of the week, starting from Monday as 0.
     /// - Parameter timestamp: The timestamp for which to calculate the adjusted current day.
@@ -139,11 +196,37 @@ struct Business: Codable {
         return (currentDay + 5) % 7
     }
     
+    private func formatTimeSlot(_ timeSlot: TimeSlot, _ periodCase: Case = .UPPER) -> String {
+        let startTime = convertMinutesToTime(timeSlot.start, .LOWER)
+        let endTime = convertMinutesToTime(timeSlot.end, .LOWER)
+        return "\(startTime)-\(endTime)"
+    }
     
-}
+    private func convertMinutesToTime(_ minutes: Int?, _ periodCase: Case = .UPPER) -> String {
+        guard let minutes = minutes else {
+            return ""
+        }
+        let hours = minutes / 60
+        let remainderMinutes = minutes % 60
+        
+        let format = getTimeFormat(for: hours, remainderMinutes: remainderMinutes)
+        let dateComponents = DateComponents(hour: hours, minute: remainderMinutes)
 
-extension Business {
-    
+        guard let date = Calendar.current.date(from: dateComponents) else {
+            return "Invalid Time"
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+
+        let formattedTime = formatter.string(from: date)
+
+        switch periodCase {
+        case .LOWER:
+            return formattedTime.lowercased()
+        case .UPPER:
+            return formattedTime.uppercased()
+        }
+    }
     // Helper method to calculate current timestamp in minutes
     private func getCurrentTimestampInMinutes(from timestamp: Int) -> Int {
         let nowComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
@@ -174,32 +257,6 @@ extension Business {
         
         // If no valid time slots found, return the current index
         return startInfo.day
-    }
-    
-    private func convertMinutesToTime(_ minutes: Int?, _ periodCase: Case = .UPPER) -> String {
-        guard let minutes = minutes else {
-            return ""
-        }
-        let hours = minutes / 60
-        let remainderMinutes = minutes % 60
-        
-        let format = getTimeFormat(for: hours, remainderMinutes: remainderMinutes)
-        let dateComponents = DateComponents(hour: hours, minute: remainderMinutes)
-
-        guard let date = Calendar.current.date(from: dateComponents) else {
-            return "Invalid Time"
-        }
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-
-        let formattedTime = formatter.string(from: date)
-
-        switch periodCase {
-        case .LOWER:
-            return formattedTime.lowercased()
-        case .UPPER:
-            return formattedTime.uppercased()
-        }
     }
     
     private func getTimeFormat(for hours: Int, remainderMinutes: Int) -> String {
@@ -249,6 +306,13 @@ struct Hour: Codable {
 struct TimeSlot {
     let start: Int
     let end: Int
+}
+
+struct PresentedOpeningHours: Hashable, Identifiable {
+    let id = UUID()
+    let day: String
+    let hours: String
+    let isBold: Bool
 }
 
 enum DayOfWeek: String, CaseIterable, Codable {

@@ -80,4 +80,72 @@ final class BusinessViewModelTests: XCTestCase {
         let openStatus = businessVM.business!.openStatus(currentTimestamp: 1705433410, periodCase: .LOWER) // 2024.01.16 14:30:10 (TUE)
         XCTAssertEqual(openStatus, "Opens again at 3pm")
     }
+    
+    func testOpenStatus6() async {
+        let mock = MockBusinessService()
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        await businessVM.getBusiness();
+        let openStatus = businessVM.business!.openStatus(currentTimestamp: 1705433410, periodCase: .LOWER) // 2024.01.16 14:30:10 (TUE)
+        XCTAssertEqual(openStatus, "Opens again at 3pm")
+    }
+    
+    func testformattedOpeningHours0() async {
+        let mock = MockBusinessService()
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        await businessVM.getBusiness();
+        let formattedOpeningHours = businessVM.business!.formattedOpeningHours(from: 1705034700) // 2024.01.11 23:45:00 (THU)
+        XCTAssertEqual(formattedOpeningHours.count, 10)
+    }
+    
+    
+    func testformattedOpeningHours1() async {
+        let mock = MockBusinessService()
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        await businessVM.getBusiness();
+        let formattedOpeningHours = businessVM.business!.formattedOpeningHours(from: 1705034700) // 2024.01.11 23:45:00 (THU)
+        XCTAssertEqual(formattedOpeningHours[0].day, "Monday")
+        XCTAssertEqual(formattedOpeningHours[0].hours, "Closed")
+        XCTAssertEqual(formattedOpeningHours[0].isBold, false)
+    }
+    
+    func testformattedOpeningHours2() async {
+        let mock = MockBusinessService()
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        await businessVM.getBusiness();
+        let formattedOpeningHours = businessVM.business!.formattedOpeningHours(from: 1705034700) // 2024.01.11 23:45:00 (THU)
+        XCTAssertEqual(formattedOpeningHours[1].day, "Tuesday")
+        XCTAssertEqual(formattedOpeningHours[1].hours, "7am-1pm")
+        XCTAssertEqual(formattedOpeningHours[1].isBold, false)
+        XCTAssertEqual(formattedOpeningHours[2].day, "")
+        XCTAssertEqual(formattedOpeningHours[2].hours, "3pm-10pm")
+        XCTAssertEqual(formattedOpeningHours[2].isBold, false)
+    }
+    
+    func testformattedOpeningHours3() async {
+        let mock = MockBusinessService()
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        await businessVM.getBusiness();
+        let formattedOpeningHours = businessVM.business!.formattedOpeningHours(from: 1705034700) // 2024.01.11 23:45:00 (THU)
+        XCTAssertEqual(formattedOpeningHours[3].day, "Wednesday")
+        XCTAssertEqual(formattedOpeningHours[3].hours, "7am-1pm")
+        XCTAssertEqual(formattedOpeningHours[3].isBold, false)
+        XCTAssertEqual(formattedOpeningHours[4].day, "")
+        XCTAssertEqual(formattedOpeningHours[4].hours, "3pm-10pm")
+        XCTAssertEqual(formattedOpeningHours[4].isBold, false)
+    }
+    
+    func testformattedOpeningHours4() async {
+        let mock = MockBusinessService()
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        await businessVM.getBusiness();
+        let formattedOpeningHours = businessVM.business!.formattedOpeningHours(from: 1705034700) // 2024.01.11 23:45:00 (THU)
+        XCTAssertEqual(formattedOpeningHours[5].day, "Thursday")
+        XCTAssertEqual(formattedOpeningHours[5].hours, "Open 24hrs")
+        XCTAssertEqual(formattedOpeningHours[5].isBold, true)
+    }
+    
+    
+    
+    
+    
 }

@@ -24,6 +24,7 @@
 		AEAF30B02B50B4AE00C7778B /* BusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */; };
 		AEAF30B22B50B4D100C7778B /* BusinessViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30B12B50B4D100C7778B /* BusinessViewModelTests.swift */; };
 		AEDC478A2B51AE4B00A33904 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC47892B51AE4B00A33904 /* HomeView.swift */; };
+		AEDC478B2B51E6AE00A33904 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -346,6 +347,7 @@
 				AEAF30A62B50B24500C7778B /* MockBusinessService.swift in Sources */,
 				AEAF30AC2B50B31D00C7778B /* Business.swift in Sources */,
 				AEAF30A42B50B1DC00C7778B /* BusinessService.swift in Sources */,
+				AEDC478B2B51E6AE00A33904 /* NetworkManager.swift in Sources */,
 				AEAF30872B50AA4400C7778B /* BusinessDisplayTests.swift in Sources */,
 				AEAF30B22B50B4D100C7778B /* BusinessViewModelTests.swift in Sources */,
 				AEAF30B02B50B4AE00C7778B /* BusinessViewModel.swift in Sources */,
