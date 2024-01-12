@@ -38,7 +38,7 @@ final class BusinessViewModelTests: XCTestCase {
         XCTAssertNil(businessVM.business)
         await businessVM.getBusiness();
         XCTAssertEqual(businessVM.business!.locationName, "BEASTRO by Marshawn Lynch")
-        XCTAssertEqual(businessVM.business!.hours.count, 7)
+        XCTAssertEqual(businessVM.business!.hours.count, 9)
     }
     
     func testOpeningHours() {
