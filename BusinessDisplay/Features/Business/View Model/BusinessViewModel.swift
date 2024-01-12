@@ -7,12 +7,16 @@
 
 import Foundation
 
-class BusinessViewModel {
+class BusinessViewModel: ObservableObject {
     internal var business: Business? = nil
     
     private var businessService: BusinessFetching
     init(businessFetching: BusinessFetching) {
         self.businessService = businessFetching
+        Task {
+            await getBusiness()
+        }
+        
     }
     
     func getBusiness() async {

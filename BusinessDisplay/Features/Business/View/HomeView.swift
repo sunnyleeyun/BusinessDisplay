@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject var viewModel = BusinessViewModel(businessFetching: BusinessService(networkManager: NetworkManager()))
+    
     var body: some View {
         GeometryReader { geo in
-            
             ZStack {
                 Image("Wallpaper")
                     .resizable()
@@ -18,6 +19,7 @@ struct HomeView: View {
                     .edgesIgnoringSafeArea(.all)
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                     .opacity(1)
+                
             }
         }
     }
