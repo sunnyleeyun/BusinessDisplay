@@ -9,7 +9,8 @@ import Foundation
 
 class BusinessViewModel: ObservableObject {
     let timestamp = Date()
-    internal var business: Business? = nil
+    
+    @Published internal var business: Business? = nil
     
     @Published var status: String = "Status"
     @Published var isExpanded: Bool = false
@@ -19,15 +20,15 @@ class BusinessViewModel: ObservableObject {
         self.businessService = businessFetching
         Task {
             await getBusiness()
-            print(business)
         }
-        
     }
     
     func getBusiness() async {
         do {
             let business = try await businessService.fetchLocation()
-            self.business = business
+            DispatchQueue.main.async {
+                self.business = business
+            }
         } catch {
             debugPrint("Error getBusiness \(error)")
         }

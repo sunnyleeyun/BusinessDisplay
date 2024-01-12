@@ -11,15 +11,19 @@ struct HomeView: View {
     @ObservedObject var viewModel = BusinessViewModel(businessFetching: BusinessService(networkManager: NetworkManager()))
     @State var subviewHeight : CGFloat = 0
     
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-    }
+    
     var body: some View {
-        NavigationView {
-            ZStack {
-                splashImageBackground
+        ZStack {
+            splashImageBackground
+            
+            VStack() {
+                Text(viewModel.business?.locationName ?? "")
+                    .fontWeight(.bold)
+                    .font(.system(size: 54))
+                    .foregroundStyle(.white)
+                    
+                
                 VStack {
-                    Text("Headline")
                     VStack {
                         ForEach(viewModel.formattedOpeningHours(), id: \.self) { openingHours in
                             HStack {
@@ -27,7 +31,7 @@ struct HomeView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 Text(openingHours.hours)
                                     .frame(maxWidth: .infinity, alignment: .trailing)
-                            }                       
+                            }
                         }
                     }
                 }
@@ -47,9 +51,12 @@ struct HomeView: View {
                         viewModel.isExpanded.toggle()
                     }
                 }
+                
+                Spacer()
             }
-            
         }
+        
+        
         
         
     }
