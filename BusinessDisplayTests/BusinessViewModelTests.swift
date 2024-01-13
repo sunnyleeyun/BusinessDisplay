@@ -6,9 +6,10 @@
 //
 
 import XCTest
+import SwiftUI
 
 final class BusinessViewModelTests: XCTestCase {
-
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -35,6 +36,17 @@ final class BusinessViewModelTests: XCTestCase {
         // then
         XCTAssertEqual(businessVM.business!.locationName, "BEASTRO by Marshawn Lynch")
         XCTAssertEqual(businessVM.business!.hours.count, 9)
+    }
+    
+    @MainActor func testBusinessLoadedError() async {
+        // given
+        let mock = MockBusinessServiceError()
+        // when
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        await businessVM.getBusiness();
+        // then
+        XCTAssertNil(businessVM.business)
+        XCTAssertEqual(businessVM.viewStatus, .isError)
     }
     
     @MainActor func testformattedOpeningHours0() async {
@@ -107,4 +119,22 @@ final class BusinessViewModelTests: XCTestCase {
     }
     
     
+    func testGetStatusColor() async {
+        // given
+        let mock = MockBusinessService()
+        // when
+        let businessVM = BusinessViewModel(businessFetching: mock)
+        await businessVM.getBusiness();
+        let openingStatus1 = OpeningStatus(label: "Open 24hrs", color: .GREEN)
+        let color1 = businessVM.getStatusColor(openingStatus1)
+        XCTAssertEqual(color1, Color.green)
+
+        let openingStatus2 = OpeningStatus(label: "Open 24hrs", color: .YELLOW)
+        let color2 = businessVM.getStatusColor(openingStatus2)
+        XCTAssertEqual(color2, Color.yellow)
+        
+        let openingStatus3 = OpeningStatus(label: "Open 24hrs", color: .RED)
+        let color3 = businessVM.getStatusColor(openingStatus3)
+        XCTAssertEqual(color3, Color.red)
+    }
 }

@@ -8,12 +8,18 @@
 import Foundation
 import SwiftUI
 
+enum ViewStatus {
+    case isLoading
+    case isError
+    case isLoaded
+}
+
 class BusinessViewModel: ObservableObject {
     let timestamp = Date()
     
     @Published internal var business: Business? = nil
     
-    @Published var status: String = "Status"
+    @Published var viewStatus: ViewStatus = .isLoading
     @Published var isExpanded: Bool = false
     
     private var businessService: BusinessFetching
@@ -29,9 +35,14 @@ class BusinessViewModel: ObservableObject {
             let business = try await businessService.fetchLocation()
             DispatchQueue.main.async {
                 self.business = business
+                self.viewStatus = .isLoaded
             }
         } catch {
             debugPrint("Error getBusiness \(error)")
+            DispatchQueue.main.async {
+                self.business = nil
+                self.viewStatus = .isError
+            }
         }
     }
     

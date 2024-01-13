@@ -30,6 +30,7 @@
 		AEDC47932B5308AB00A33904 /* StubBusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC47922B5308AB00A33904 /* StubBusinessModel.swift */; };
 		AEDC47952B53099E00A33904 /* BusinessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC47942B53099E00A33904 /* BusinessTests.swift */; };
 		AEDC47972B530BD100A33904 /* location.json in Resources */ = {isa = PBXBuildFile; fileRef = AEDC47962B5309D700A33904 /* location.json */; };
+		AEDC47992B53336C00A33904 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC47982B53336C00A33904 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		AEDC47922B5308AB00A33904 /* StubBusinessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubBusinessModel.swift; sourceTree = "<group>"; };
 		AEDC47942B53099E00A33904 /* BusinessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessTests.swift; sourceTree = "<group>"; };
 		AEDC47962B5309D700A33904 /* location.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = location.json; sourceTree = "<group>"; };
+		AEDC47982B53336C00A33904 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				AEDC478E2B52060200A33904 /* LoadingView.swift */,
+				AEDC47982B53336C00A33904 /* ErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				AEAF30782B50AA4100C7778B /* ContentView.swift in Sources */,
 				AEDC47912B52098800A33904 /* ColorExtension.swift in Sources */,
 				AEAF30A32B50B1DC00C7778B /* BusinessService.swift in Sources */,
+				AEDC47992B53336C00A33904 /* ErrorView.swift in Sources */,
 				AEAF30AB2B50B31D00C7778B /* Business.swift in Sources */,
 				AEDC478F2B52060200A33904 /* LoadingView.swift in Sources */,
 				AEAF30AF2B50B4AE00C7778B /* BusinessViewModel.swift in Sources */,

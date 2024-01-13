@@ -13,7 +13,7 @@ final class MockBusinessService: BusinessFetching {
         return try JSONDecoder().decode(Business.self, from: jsonData)
     }
     
-
+    
     let jsonString = """
     {
         "location_name": "BEASTRO by Marshawn Lynch",
@@ -66,5 +66,15 @@ final class MockBusinessService: BusinessFetching {
         ]
     }
     """
+    
+}
 
+final class MockBusinessServiceError: BusinessFetching {
+    enum MockError: Error {
+        case testError
+    }
+    
+    func fetchLocation() async throws -> Business {
+        throw MockError.testError
+    }
 }
