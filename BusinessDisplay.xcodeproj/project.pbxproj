@@ -26,6 +26,7 @@
 		AEDC478A2B51AE4B00A33904 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC47892B51AE4B00A33904 /* HomeView.swift */; };
 		AEDC478B2B51E6AE00A33904 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */; };
 		AEDC478F2B52060200A33904 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC478E2B52060200A33904 /* LoadingView.swift */; };
+		AEDC47912B52098800A33904 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC47902B52098800A33904 /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		AEAF30B12B50B4D100C7778B /* BusinessViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewModelTests.swift; sourceTree = "<group>"; };
 		AEDC47892B51AE4B00A33904 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AEDC478E2B52060200A33904 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		AEDC47902B52098800A33904 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				AEDC478D2B5205F000A33904 /* Views */,
+				AEDC47902B52098800A33904 /* ColorExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				AEAF30A12B50AD3B00C7778B /* NetworkManager.swift in Sources */,
 				AEDC478A2B51AE4B00A33904 /* HomeView.swift in Sources */,
 				AEAF30782B50AA4100C7778B /* ContentView.swift in Sources */,
+				AEDC47912B52098800A33904 /* ColorExtension.swift in Sources */,
 				AEAF30A32B50B1DC00C7778B /* BusinessService.swift in Sources */,
 				AEAF30AB2B50B31D00C7778B /* Business.swift in Sources */,
 				AEDC478F2B52060200A33904 /* LoadingView.swift in Sources */,

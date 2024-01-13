@@ -12,6 +12,17 @@ enum Case {
     case LOWER
 }
 
+struct OpeningStatus {
+    let label: String
+    let color: OpeningColorStatus
+}
+
+enum OpeningColorStatus {
+    case GREEN
+    case YELLOW
+    case RED
+}
+
 struct Business: Codable {
     let locationName: String
     let hours: [Hour]
@@ -66,10 +77,9 @@ struct Business: Codable {
         case opensAgainAt(String)
         case opens(String, String)
     }
-        
     
     // Method to generate open text based on the current timestamp
-    func openStatus(currentTimestamp: Int, periodCase: Case = .UPPER) -> String {
+    func openStatus(from currentTimestamp: Int, periodCase: Case = .UPPER) -> OpeningStatus {
         let openingHours = openingHours()
         if openingHours.count != 7 {
             fatalError("Opening Hours Mapping Issue")
@@ -83,13 +93,13 @@ struct Business: Codable {
         
         switch status {
         case .openUntil(let convertedTime):
-            return "Open until \(convertedTime)"
+            return OpeningStatus(label: "Open until \(convertedTime)", color: .GREEN)
         case .openUntilReopens(let convertedTime, let nextConvertedTime):
-            return "Open until \(convertedTime), reopens at \(nextConvertedTime)"
+            return OpeningStatus(label: "Open until \(convertedTime), reopens at \(nextConvertedTime)", color: .YELLOW)
         case .opensAgainAt(let nextConvertedTime):
-            return "Opens again at \(nextConvertedTime)"
+            return OpeningStatus(label: "Opens again at \(nextConvertedTime)", color: .RED)
         case .opens(let nextDay, let nextConvertedTime):
-            return "Opens \(nextDay) \(nextConvertedTime)"
+            return OpeningStatus(label: "Opens \(nextDay) \(nextConvertedTime)", color: .RED)
         }
     }
     

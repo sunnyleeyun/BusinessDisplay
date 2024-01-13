@@ -17,7 +17,7 @@ final class BusinessViewModelTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testBusinessLoaded() async {
+    @MainActor func testBusinessLoaded() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         XCTAssertNil(businessVM.business)
@@ -26,7 +26,7 @@ final class BusinessViewModelTests: XCTestCase {
         XCTAssertEqual(businessVM.business!.hours.count, 9)
     }
     
-    func testOpeningHours() async {
+    @MainActor func testOpeningHours() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
@@ -41,55 +41,61 @@ final class BusinessViewModelTests: XCTestCase {
         XCTAssertEqual(openingHours[6].1.count, 2)
     }
     
-    func testOpenStatus1() async {
+    @MainActor func testOpenStatus1() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
-        let openStatus = businessVM.business!.openStatus(currentTimestamp: 1705031145, periodCase: .LOWER) // 2024.01.11 22:45:45 (THU)
-        XCTAssertEqual(openStatus, "Open until 12am")
+        let openStatus = businessVM.business!.openStatus(from: 1705031145, periodCase: .LOWER) // 2024.01.11 22:45:45 (THU)
+        XCTAssertEqual(openStatus.label, "Open until 12am")
+        XCTAssertEqual(openStatus.color, .GREEN)
     }
     
-    func testOpenStatus2() async {
+    @MainActor func testOpenStatus2() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
-        let openStatus = businessVM.business!.openStatus(currentTimestamp: 1705034700, periodCase: .LOWER) // 2024.01.11 23:45:00 (THU)
-        XCTAssertEqual(openStatus, "Open until 12am, reopens at 7am")
+        let openStatus = businessVM.business!.openStatus(from: 1705034700, periodCase: .LOWER) // 2024.01.11 23:45:00 (THU)
+        XCTAssertEqual(openStatus.label, "Open until 12am, reopens at 7am")
+        XCTAssertEqual(openStatus.color, .YELLOW)
     }
     
-    func testOpenStatus3() async {
+    @MainActor func testOpenStatus3() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
-        let openStatus = businessVM.business!.openStatus(currentTimestamp: 1705037410, periodCase: .LOWER) // 2024.01.12 00:30:10 (FRI)
-        XCTAssertEqual(openStatus, "Opens again at 7am")
+        let openStatus = businessVM.business!.openStatus(from: 1705037410, periodCase: .LOWER) // 2024.01.12 00:30:10 (FRI)
+        XCTAssertEqual(openStatus.label, "Opens again at 7am")
+        XCTAssertEqual(openStatus.color, .RED)
     }
     
-    func testOpenStatus4() async {
+    @MainActor func testOpenStatus4() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
-        let openStatus = businessVM.business!.openStatus(currentTimestamp: 1705293010, periodCase: .LOWER) // 2024.01.14 23:30:10 (SUN)
-        XCTAssertEqual(openStatus, "Opens Tuesday 7am")
+        let openStatus = businessVM.business!.openStatus(from: 1705293010, periodCase: .LOWER) // 2024.01.14 23:30:10 (SUN)
+        XCTAssertEqual(openStatus.label, "Opens Tuesday 7am")
+        XCTAssertEqual(openStatus.color, .RED)
     }
     
-    func testOpenStatus5() async {
+    @MainActor func testOpenStatus5() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
-        let openStatus = businessVM.business!.openStatus(currentTimestamp: 1705433410, periodCase: .LOWER) // 2024.01.16 14:30:10 (TUE)
-        XCTAssertEqual(openStatus, "Opens again at 3pm")
+        let openStatus = businessVM.business!.openStatus(from: 1705433410, periodCase: .LOWER) // 2024.01.16 14:30:10 (TUE)
+        XCTAssertEqual(openStatus.label, "Opens again at 3pm")
+        XCTAssertEqual(openStatus.color, .RED)
     }
     
-    func testOpenStatus6() async {
+    @MainActor func testOpenStatus6() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
-        let openStatus = businessVM.business!.openStatus(currentTimestamp: 1705433410, periodCase: .LOWER) // 2024.01.16 14:30:10 (TUE)
-        XCTAssertEqual(openStatus, "Opens again at 3pm")
+        let openStatus = businessVM.business!.openStatus(from: 1705433410, periodCase: .LOWER) // 2024.01.16 14:30:10 (TUE)
+        XCTAssertEqual(openStatus.label, "Opens again at 3pm")
+        XCTAssertEqual(openStatus.color, .RED)
     }
     
-    func testformattedOpeningHours0() async {
+    @MainActor func testformattedOpeningHours0() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
@@ -98,7 +104,7 @@ final class BusinessViewModelTests: XCTestCase {
     }
     
     
-    func testformattedOpeningHours1() async {
+    @MainActor func testformattedOpeningHours1() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
@@ -108,7 +114,7 @@ final class BusinessViewModelTests: XCTestCase {
         XCTAssertEqual(formattedOpeningHours[0].isBold, false)
     }
     
-    func testformattedOpeningHours2() async {
+    @MainActor func testformattedOpeningHours2() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
@@ -121,7 +127,7 @@ final class BusinessViewModelTests: XCTestCase {
         XCTAssertEqual(formattedOpeningHours[2].isBold, false)
     }
     
-    func testformattedOpeningHours3() async {
+    @MainActor func testformattedOpeningHours3() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();
@@ -134,7 +140,7 @@ final class BusinessViewModelTests: XCTestCase {
         XCTAssertEqual(formattedOpeningHours[4].isBold, false)
     }
     
-    func testformattedOpeningHours4() async {
+    @MainActor func testformattedOpeningHours4() async {
         let mock = MockBusinessService()
         let businessVM = BusinessViewModel(businessFetching: mock)
         await businessVM.getBusiness();

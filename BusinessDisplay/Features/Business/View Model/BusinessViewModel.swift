@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class BusinessViewModel: ObservableObject {
     let timestamp = Date()
@@ -44,4 +45,14 @@ class BusinessViewModel: ObservableObject {
         return timestamp
     }
     
+    func getStatus() -> OpeningStatus {
+        guard let business = business else {
+            return OpeningStatus(label: "Information Not Found", color: .RED)
+        }
+        return business.openStatus(from: getCurrentTimestamp())
+    }
+    
+    func getStatusColor(_ status: OpeningStatus) -> Color {
+        return status.color == .GREEN ? Color.green : status.color == .YELLOW ? Color.yellow : Color.red
+    }
 }

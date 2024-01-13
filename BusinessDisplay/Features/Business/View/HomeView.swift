@@ -21,17 +21,46 @@ struct HomeView: View {
                     .fontWeight(.bold)
                     .font(.system(size: 54))
                     .foregroundStyle(.white)
-                    
+                
                 
                 VStack {
-                    VStack {
-                        ForEach(viewModel.formattedOpeningHours(), id: \.self) { openingHours in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            
                             HStack {
-                                Text(openingHours.day)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                Text(openingHours.hours)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                Text(viewModel.getStatus().label)
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color(hex: 0x333333))
+                                
+                                Circle()
+                                    .fill(viewModel.getStatusColor(viewModel.getStatus()))
+                                    .frame(width: 7, height: 7)
                             }
+                            
+                            HStack {
+                                Text("SEE FULL HOURS")
+                                    .font(.footnote)
+                                    .foregroundColor(Color(hex: 0x333333, opacity: 0.31))
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        Image("Accordion")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color(hex: 0x333333))
+
+                    }
+                    
+                    
+                    ForEach(viewModel.formattedOpeningHours(), id: \.self) { openingHours in
+                        HStack {
+                            Text(openingHours.day)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(openingHours.hours)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                     }
                 }
