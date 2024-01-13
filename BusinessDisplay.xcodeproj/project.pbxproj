@@ -23,6 +23,10 @@
 		AEAF30AF2B50B4AE00C7778B /* BusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */; };
 		AEAF30B02B50B4AE00C7778B /* BusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */; };
 		AEAF30B22B50B4D100C7778B /* BusinessViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30B12B50B4D100C7778B /* BusinessViewModelTests.swift */; };
+		AEDC478A2B51AE4B00A33904 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC47892B51AE4B00A33904 /* HomeView.swift */; };
+		AEDC478B2B51E6AE00A33904 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF30A02B50AD3B00C7778B /* NetworkManager.swift */; };
+		AEDC478F2B52060200A33904 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC478E2B52060200A33904 /* LoadingView.swift */; };
+		AEDC47912B52098800A33904 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDC47902B52098800A33904 /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,9 @@
 		AEAF30AA2B50B31D00C7778B /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewModel.swift; sourceTree = "<group>"; };
 		AEAF30B12B50B4D100C7778B /* BusinessViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewModelTests.swift; sourceTree = "<group>"; };
+		AEDC47892B51AE4B00A33904 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AEDC478E2B52060200A33904 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		AEDC47902B52098800A33904 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +116,7 @@
 		AEAF30742B50AA4100C7778B /* BusinessDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				AEDC478C2B5205E000A33904 /* Util */,
 				AEAF30A72B50B2DE00C7778B /* Features */,
 				AEAF309F2B50AD0E00C7778B /* Services */,
 				AEAF30752B50AA4100C7778B /* BusinessDisplayApp.swift */,
@@ -166,6 +174,7 @@
 		AEAF30A82B50B2EF00C7778B /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				AEDC47882B51AE3000A33904 /* View */,
 				AEAF30AD2B50B48300C7778B /* View Model */,
 				AEAF30A92B50B31200C7778B /* Model */,
 			);
@@ -186,6 +195,31 @@
 				AEAF30AE2B50B4AE00C7778B /* BusinessViewModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		AEDC47882B51AE3000A33904 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AEDC47892B51AE4B00A33904 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AEDC478C2B5205E000A33904 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				AEDC478D2B5205F000A33904 /* Views */,
+				AEDC47902B52098800A33904 /* ColorExtension.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		AEDC478D2B5205F000A33904 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AEDC478E2B52060200A33904 /* LoadingView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,9 +353,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEAF30A12B50AD3B00C7778B /* NetworkManager.swift in Sources */,
+				AEDC478A2B51AE4B00A33904 /* HomeView.swift in Sources */,
 				AEAF30782B50AA4100C7778B /* ContentView.swift in Sources */,
+				AEDC47912B52098800A33904 /* ColorExtension.swift in Sources */,
 				AEAF30A32B50B1DC00C7778B /* BusinessService.swift in Sources */,
 				AEAF30AB2B50B31D00C7778B /* Business.swift in Sources */,
+				AEDC478F2B52060200A33904 /* LoadingView.swift in Sources */,
 				AEAF30AF2B50B4AE00C7778B /* BusinessViewModel.swift in Sources */,
 				AEAF30762B50AA4100C7778B /* BusinessDisplayApp.swift in Sources */,
 			);
@@ -334,6 +371,7 @@
 				AEAF30A62B50B24500C7778B /* MockBusinessService.swift in Sources */,
 				AEAF30AC2B50B31D00C7778B /* Business.swift in Sources */,
 				AEAF30A42B50B1DC00C7778B /* BusinessService.swift in Sources */,
+				AEDC478B2B51E6AE00A33904 /* NetworkManager.swift in Sources */,
 				AEAF30872B50AA4400C7778B /* BusinessDisplayTests.swift in Sources */,
 				AEAF30B22B50B4D100C7778B /* BusinessViewModelTests.swift in Sources */,
 				AEAF30B02B50B4AE00C7778B /* BusinessViewModel.swift in Sources */,
