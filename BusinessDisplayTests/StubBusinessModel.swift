@@ -1,18 +1,17 @@
 //
-//  MockLocationService.swift
+//  StubBusinessModel.swift
 //  BusinessDisplayTests
 //
-//  Created by 李昀 on 2024/1/11.
+//  Created by 李昀 on 2024/1/13.
 //
 
-import XCTest
+import Foundation
 
-final class MockBusinessService: BusinessFetching {
-    func fetchLocation() async throws -> Business {
+final class StubBusinessModel {
+    func getBusiness() throws -> Business {
         let jsonData = jsonString.data(using: .utf8)!
         return try JSONDecoder().decode(Business.self, from: jsonData)
     }
-    
     
     let jsonString = """
     {
@@ -66,15 +65,5 @@ final class MockBusinessService: BusinessFetching {
         ]
     }
     """
-    
-}
 
-final class MockBusinessServiceError: BusinessFetching {
-    enum MockError: Error {
-        case testError
-    }
-    
-    func fetchLocation() async throws -> Business {
-        throw MockError.testError
-    }
 }
