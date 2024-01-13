@@ -9,9 +9,16 @@ import SwiftUI
 
 struct LoadingView: View {
     var body: some View {
-        ProgressView("Loading...")
-            .progressViewStyle(CircularProgressViewStyle())
-            .padding()
+        ZStack {
+            // Background blur effect
+            Color.black.opacity(0.5)
+            
+            // Progress view with tint color
+            ProgressView("Loading...")
+                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                .padding()
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
