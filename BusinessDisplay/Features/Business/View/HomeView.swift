@@ -29,8 +29,7 @@ struct HomeView: View {
                             
                             HStack {
                                 Text(viewModel.getStatus().label)
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
+                                    .font(.system(size: 18))
                                     .foregroundColor(Color(hex: 0x333333))
                                 
                                 Circle()
@@ -40,7 +39,7 @@ struct HomeView: View {
                             
                             HStack {
                                 Text("SEE FULL HOURS")
-                                    .font(.footnote)
+                                    .font(.system(size: 12))
                                     .foregroundColor(Color(hex: 0x333333, opacity: 0.31))
                             }
                         }
@@ -58,23 +57,30 @@ struct HomeView: View {
                     ForEach(viewModel.formattedOpeningHours(), id: \.self) { openingHours in
                         HStack {
                             Text(openingHours.day)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.system(size: 18))
+                                .foregroundColor(Color(hex: 0x333333))
+                            Spacer()
                             Text(openingHours.hours)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .foregroundColor(Color(hex: 0x333333))
                         }
+                        .padding(.vertical, 2)
                     }
                 }
+                // @TODO: Add bold, blur background radius, disclosure animation
                 .background(GeometryReader {
                     Color.clear.preference(key: ViewHeightKey.self,
                                            value: $0.frame(in: .local).size.height)
                 })
                 .onPreferenceChange(ViewHeightKey.self) { subviewHeight = $0 }
-                .frame(height: viewModel.isExpanded ? subviewHeight : 50, alignment: .top)
+                .frame(height: viewModel.isExpanded ? subviewHeight : 36, alignment: .top)
                 .padding()
                 .clipped()
                 .frame(maxWidth: .infinity)
                 .transition(.move(edge: .leading))
-                .background(Color.gray.cornerRadius(10.0))
+                .background(.ultraThinMaterial)
+//                .background(.ultraThick)
+//                .background(Color(hex: 0xD9D9D9))
+//                .blur(radius: 8)
                 .onTapGesture {
                     withAnimation(.easeIn(duration: 0.5)) {
                         viewModel.isExpanded.toggle()
@@ -82,7 +88,7 @@ struct HomeView: View {
                 }
                 
                 Spacer()
-            }
+            }.padding(24)
         }
         
         
