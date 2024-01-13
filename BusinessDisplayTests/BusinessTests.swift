@@ -39,8 +39,7 @@ final class BusinessTests: XCTestCase {
         XCTAssertEqual(business.hours.count, 9)
     }
     
-    
-    func testOpeningHours() async {
+    func testOpeningHours() {
         // given, when
         let openingHours = sut.openingHours()
         // then
@@ -54,7 +53,7 @@ final class BusinessTests: XCTestCase {
         XCTAssertEqual(openingHours[6].1.count, 2)
     }
     
-    func testOpenStatus1() async {
+    func testOpenStatus1() {
         // given, when
         let openStatus = sut.openStatus(from: 1705031145, periodCase: .LOWER) // 2024.01.11 22:45:45 (THU)
         // then
@@ -62,7 +61,7 @@ final class BusinessTests: XCTestCase {
         XCTAssertEqual(openStatus.color, .GREEN)
     }
     
-    func testOpenStatus2() async {
+    func testOpenStatus2() {
         // given, when
         let openStatus = sut.openStatus(from: 1705034700, periodCase: .LOWER) // 2024.01.11 23:45:00 (THU)
         // then
@@ -70,7 +69,7 @@ final class BusinessTests: XCTestCase {
         XCTAssertEqual(openStatus.color, .YELLOW)
     }
     
-    func testOpenStatus3() async {
+    func testOpenStatus3() {
         // given, when
         let openStatus = sut.openStatus(from: 1705037410, periodCase: .LOWER) // 2024.01.12 00:30:10 (FRI)
         // then
@@ -78,7 +77,7 @@ final class BusinessTests: XCTestCase {
         XCTAssertEqual(openStatus.color, .RED)
     }
     
-    func testOpenStatus4() async {
+    func testOpenStatus4() {
         // given, when
         let openStatus = sut.openStatus(from: 1705293010, periodCase: .LOWER) // 2024.01.14 23:30:10 (SUN)
         // then
@@ -86,7 +85,7 @@ final class BusinessTests: XCTestCase {
         XCTAssertEqual(openStatus.color, .RED)
     }
     
-    func testOpenStatus5() async {
+    func testOpenStatus5() {
         // given, when
         let openStatus = sut.openStatus(from: 1705433410, periodCase: .LOWER) // 2024.01.16 14:30:10 (TUE)
         // then
@@ -94,7 +93,7 @@ final class BusinessTests: XCTestCase {
         XCTAssertEqual(openStatus.color, .RED)
     }
     
-    func testOpenStatus6() async {
+    func testOpenStatus6() {
         // given, when
         let openStatus = sut.openStatus(from: 1705433410, periodCase: .LOWER) // 2024.01.16 14:30:10 (TUE)
         // then
